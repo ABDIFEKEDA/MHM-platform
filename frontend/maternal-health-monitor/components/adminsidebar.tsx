@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -8,12 +9,11 @@ import { Button } from "@/components/ui/button";
 import {
   HomeIcon,
   UsersIcon,
-  CalendarIcon,
- 
+  CalendarIcon, 
   Cog6ToothIcon,
   ChevronDownIcon,
   ChevronUpIcon,
-  ArrowLeftOnRectangleIcon,
+ 
 } from "@heroicons/react/24/outline";
 
 export default function AdminSidebar() {
@@ -23,12 +23,12 @@ export default function AdminSidebar() {
 
   const menuItemClass = (path: string) =>
     `flex items-center gap-3 px-3 py-2 rounded w-full justify-start ${
-      pathname === path ? "bg-gray-700" : "hover:bg-gray-700"
+      pathname === path ? "bg-gray-700" : "hover:bg-gray-200"
     }`;
 
   return (
     <div
-      className={`h-screen bg-gray-900 text-white flex flex-col ${
+      className={`h-screen bg-[#ffffff] text-[#0F2B8F] flex flex-col ${
         collapsed ? "w-20" : "w-64"
       } transition-width duration-300`}
     >
@@ -46,9 +46,11 @@ export default function AdminSidebar() {
       {/* User Profile */}
       {!collapsed && (
         <div className="px-4 py-4 border-b border-gray-700 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gray-600"></div>
+          <div className="w-10 h-10 rounded-full bg-gray-600">
+            <Image src="/abdifk.jpg" alt="profile" width={50} height={50}  className="rounded-full" />
+          </div>
           <div>
-            <p className="font-semibold">Admin Name</p>
+            <p className="font-semibold">Abdi Fekeda</p>
             <p className="text-sm text-gray-400">Administrator</p>
           </div>
         </div>
@@ -63,7 +65,15 @@ export default function AdminSidebar() {
           </Link>
           <Link href="/admin/patients" className={menuItemClass("/admin/patients")}>
             <UsersIcon className="w-6 h-6" />
-            {!collapsed && "Patients"}
+            {!collapsed && "Patients-Management"}
+          </Link>
+          <Link href="/admin/doctors" className={menuItemClass("/admin/doctors")}>
+            <UsersIcon className="w-6 h-6" />
+            {!collapsed && "doctors-Management"}
+          </Link>
+          <Link href="/admin/profile" className={menuItemClass("/admin/profile")}>
+            <UsersIcon className="w-6 h-6" />
+            {!collapsed && "profile"}
           </Link>
           <Link href="/admin/appointments" className={menuItemClass("/admin/appointments")}>
             <CalendarIcon className="w-6 h-6" />
@@ -108,7 +118,7 @@ export default function AdminSidebar() {
       {/* Logout */}
       <div className="px-2 py-4 border-t border-gray-700">
         <Button variant="ghost" className="w-full justify-start gap-3">
-          <ArrowLeftOnRectangleIcon className="w-6 h-6" />
+
           {!collapsed && "Logout"}
         </Button>
       </div>
