@@ -23,12 +23,12 @@ export default function AdminSidebar() {
 
   const menuItemClass = (path: string) =>
     `flex items-center gap-3 px-3 py-2 rounded w-full justify-start ${
-      pathname === path ? "bg-gray-700" : "hover:bg-gray-200"
+      pathname === path ? "bg-gray-200" : "hover:bg-gray-200"
     }`;
 
   return (
     <div
-      className={`h-screen bg-[#ffffff] text-[#0F2B8F] flex flex-col ${
+      className={`h-screen bg-[#ffffff] text-[#0F2B8F] flex flex-col shadow-md ${
         collapsed ? "w-20" : "w-64"
       } transition-width duration-300`}
     >
@@ -118,7 +118,7 @@ export default function AdminSidebar() {
       {/* Logout */}
       <div className="px-2 py-4 border-t border-gray-700">
         <Link href="/">
-        <Button variant="ghost" className="w-full justify-start gap-3">
+        <Button variant="ghost" className="w-full justify-center gap-3 bg-red-600 text-white hover:bg-red-700">
 
           {!collapsed && "Logout"}
         </Button>
