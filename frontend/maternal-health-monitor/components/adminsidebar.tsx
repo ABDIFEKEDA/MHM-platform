@@ -17,7 +17,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 export default function AdminSidebar() {
-  const pathname = usePathname(); // For active link
+  const pathname = usePathname(); 
   const [openReports, setOpenReports] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
 
@@ -36,7 +36,7 @@ export default function AdminSidebar() {
       <div className="text-2xl font-bold text-center py-6 border-b border-gray-700 flex justify-between items-center px-3">
         {!collapsed && <span>Admin Panel</span>}
         <button
-          className="p-1 hover:bg-gray-700 rounded"
+          className="p-1 hover:bg-gray-200 rounded"
           onClick={() => setCollapsed(!collapsed)}
         >
           {collapsed ? <ChevronDownIcon className="w-6 h-6" /> : <ChevronUpIcon className="w-6 h-6" />}
@@ -59,23 +59,23 @@ export default function AdminSidebar() {
       {/* Menu */}
       <ScrollArea className="flex-1 px-2 py-4">
         <nav className="flex flex-col gap-2">
-          <Link href="/admin/dashboard" className={menuItemClass("/admin/dashboard")}>
+          <Link href="/dashboard/admin" className={menuItemClass("/admin")}>
             <HomeIcon className="w-6 h-6" />
             {!collapsed && "Dashboard"}
           </Link>
-          <Link href="/admin/patients" className={menuItemClass("/admin/patients")}>
+          <Link href="/dashboard/admin/patients" className={menuItemClass("/dashboard/admin/patients")}>
             <UsersIcon className="w-6 h-6" />
-            {!collapsed && "Patients-Management"}
+            {!collapsed && "patients"}
           </Link>
-          <Link href="/admin/doctors" className={menuItemClass("/admin/doctors")}>
+          <Link href="/dashboard/admin/doctors-Management" className={menuItemClass("dashboard/admin/doctors-Management")}>
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "doctors-Management"}
           </Link>
-          <Link href="/admin/profile" className={menuItemClass("/admin/profile")}>
+          <Link href="/dashboard/admin/profile" className={menuItemClass("/dashboard/admin/profile")}>
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "profile"}
           </Link>
-          <Link href="/admin/appointments" className={menuItemClass("/admin/appointments")}>
+          <Link href="/dashboard/admin/appointments" className={menuItemClass("/admin/appointments")}>
             <CalendarIcon className="w-6 h-6" />
             {!collapsed && "Appointments"}
           </Link>
@@ -83,8 +83,8 @@ export default function AdminSidebar() {
           {/* Nested Reports Menu */}
           <div className="flex flex-col">
             <button
-              className={`flex items-center justify-between px-3 py-2 w-full rounded hover:bg-gray-700 ${
-                openReports ? "bg-gray-700" : ""
+              className={`flex items-center justify-between px-3 py-2 w-full rounded hover:bg-gray-200 ${
+                openReports ? "bg-gray-2oo" : ""
               }`}
               onClick={() => setOpenReports(!openReports)}
             >
@@ -98,17 +98,17 @@ export default function AdminSidebar() {
             </button>
             {openReports && !collapsed && (
               <div className="flex flex-col ml-10 mt-1 gap-1">
-                <Link href="/admin/reports/monthly" className={menuItemClass("/admin/reports/monthly")}>
+                <Link href="/dashboard/admin/reports/monthly" className={menuItemClass("/admin/reports/monthly")}>
                   Monthly
                 </Link>
-                <Link href="/admin/reports/yearly" className={menuItemClass("/admin/reports/yearly")}>
+                <Link href="/dashboard/admin/reports/yearly" className={menuItemClass("/admin/reports/yearly")}>
                   Yearly
                 </Link>
               </div>
             )}
           </div>
 
-          <Link href="/admin/settings" className={menuItemClass("/admin/settings")}>
+          <Link href="/dashboard/admin/setting" className={menuItemClass("/admin/setting")}>
             <Cog6ToothIcon className="w-6 h-6" />
             {!collapsed && "Settings"}
           </Link>
@@ -117,10 +117,12 @@ export default function AdminSidebar() {
 
       {/* Logout */}
       <div className="px-2 py-4 border-t border-gray-700">
+        <Link href="/">
         <Button variant="ghost" className="w-full justify-start gap-3">
 
           {!collapsed && "Logout"}
         </Button>
+        </Link>
       </div>
     </div>
   );
