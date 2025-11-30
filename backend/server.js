@@ -1,2 +1,25 @@
-const q = 30;
-console.log(q);
+const dotenv = require("dotenv");
+dotenv.config();
+const express = require('express');
+const dbConnection = require('./dbConfig/dbConnection');
+const authRoutes = require('./routes/authRoutes');
+const morgan = require('morgan');
+
+
+
+const cors = require('cors');
+
+const app = express();
+const port = 4000;
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev")); 
+
+app.use('/api/auth', authRoutes);
+
+
+
+app.listen(port, ()=>{
+    console.log(`server is running on the port ${port}`);
+})
+module.exports = app;
