@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Bell, Mail } from "lucide-react";
-import { Card } from "@/components/ui/card";
+// import { Card } from "@/components/ui/card";
 
 const doctorsData = [
   {
@@ -87,7 +87,7 @@ export default function DoctorsPage() {
           </h1>
 
           <div className="flex items-center gap-5">
-            {/* Notification */}
+
             <div className="relative">
               <Bell className="w-6 h-6 text-blue-700 cursor-pointer" />
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-600 rounded-full"></span>
@@ -106,7 +106,7 @@ export default function DoctorsPage() {
         </div>
 
         <div className="flex justify-end mb-4">
-          <Button className="bg-yellow-700 hover:bg-yellow-400">
+          <Button className="bg-yellow-800 hover:bg-yellow-400">
             Add Doctors
           </Button>
         </div>
@@ -119,7 +119,9 @@ export default function DoctorsPage() {
                 <TableHead>Specialization</TableHead>
                 <TableHead>Assigned Faculty</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-center">Actions</TableHead>
+                <TableHead className="text-center">
+                  <Button className="cursor-pointer">Actions</Button>
+                </TableHead>
               </TableRow>
             </TableHeader>
 
@@ -159,7 +161,7 @@ export default function DoctorsPage() {
                       size="sm"
                       className="bg-yellow-600 hover:bg-yellow-700 cursor-pointer"
                     >
-                      View
+                      View Details
                     </Button>
                   </TableCell>
                 </TableRow>
