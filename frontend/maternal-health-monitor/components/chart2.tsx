@@ -13,18 +13,18 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// ✅ Maternal Risk Data (Sample)
+
 const data = [
   { name: "Normal", total: 45 },
   { name: "Moderate Risk", total: 25 },
   { name: "High Risk", total: 10 },
 ];
 
-// ✅ Colors for each risk level
+
 const COLORS = [
-  "#22C55E", // Green → Normal
-  "#F97316", // Orange → Moderate Risk
-  "#EF4444", // Red → High Risk
+  "#22C55E", 
+  "#F97316", 
+  "#EF4444", 
 ];
 
 export default function DashboardChart2() {

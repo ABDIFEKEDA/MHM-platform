@@ -7,7 +7,7 @@ export default function AdminDashboard() {
   return (
     <AdminLayout>
      
-<div className="bg-[#c5d2ff] min-h-screen p-8 rounded-lg">
+<div className="bg-[#c5d2ff] min-h-screen p-6 rounded-lg">
  <h1 className="text-3xl font-bold mb-6 text-[#0F2B8F]">Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
         <div className="bg-white p-6 rounded-lg shadow">
@@ -26,7 +26,7 @@ export default function AdminDashboard() {
       <div className="p-6 mt-6 bg-white rounded-lg shadow">
         <RecentActivityFilters />
       </div>
-      <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="p-6  grid grid-cols-1 md:grid-cols-2 gap-4 flex justify-between">
       <DashboardChart />
       <DashboardChart2/>
     </div>

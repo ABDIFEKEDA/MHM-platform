@@ -11,12 +11,12 @@ import {
 
 export default function RecentActivityFilters() {
   return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-48">
              <Input
-          placeholder="Search doctors by doctors name, email or phone number"
+          placeholder="Search by name, email or phone number"
         />
           
-          {/* Filter by Status */}
+         
           <Select>
             <SelectTrigger>
               <SelectValue placeholder="Filter by Status" />
@@ -28,13 +28,13 @@ export default function RecentActivityFilters() {
             </SelectContent>
           </Select>
 
-          {/* Filter by Type */}
+          
           <Select>
             <SelectTrigger>
               <SelectValue placeholder="Filter by Type" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="attachment">doctor name</SelectItem>
+              <SelectItem value="attachment">by name</SelectItem>
               <SelectItem value="internship">Email</SelectItem>
               <SelectItem value="volunteer">phone number</SelectItem>
             </SelectContent>

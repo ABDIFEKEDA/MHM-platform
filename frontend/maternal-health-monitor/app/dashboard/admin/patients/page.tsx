@@ -120,12 +120,12 @@ export default function PatientsPage() {
             </div>
             <Avatar>
               <AvatarImage src={'/avatar.png'} />
-              <AvatarFallback>AD</AvatarFallback>
+              <AvatarFallback></AvatarFallback>
             </Avatar>
           </div>
         </div>
         <div className="flex justify-end mb-4">
-          <Button className="bg-[#0F2B8F] hover:bg-blue-800">
+          <Button className="bg-yellow-800 hover:bg-blue-800 cursor-pointer">
             Add Patients
           </Button>
         </div>
@@ -140,7 +140,9 @@ export default function PatientsPage() {
                 <TableHead>Risk Level</TableHead>
                 <TableHead>Assigned Doctor</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-center">Actions</TableHead>
+                <TableHead className="text-center">
+                  <Button className="cursor-pointer">Actions</Button> 
+                  </TableHead>
               </TableRow>
             </TableHeader>
 
@@ -179,17 +181,17 @@ export default function PatientsPage() {
                   <TableCell className="flex gap-2 justify-center">
                     <Button
                       size="sm"
-                      className="bg-yellow-600 hover:bg-green-700"
+                      className="bg-yellow-600 hover:bg-green-700 cursor-pointer"
                     >
                       Edit
                     </Button>
 
-                    <Button size="sm" className="bg-red-600 hover:bg-red-700">
+                    <Button size="sm" className="bg-red-600 hover:bg-red-700 cursor-pointer">
                       Delete
                     </Button>
 
-                    <Button size="sm" className="bg-yellow-600 hover:bg-blue-700">
-                      View
+                    <Button size="sm" className="bg-yellow-600 hover:bg-blue-700 cursor-pointer">
+                      View Details
                     </Button>
                   </TableCell>
                 </TableRow>
@@ -197,11 +199,12 @@ export default function PatientsPage() {
             </TableBody>
           </Table>
 
-          <div className="flex justify-end items-center gap-4 mt-6">
+          <div className="flex justify-center items-center gap-4 mt-6">
             <Button
               variant="outline"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => p - 1)}
+              className="cursor-pointer"
             >
               Previous
             </Button>
@@ -214,6 +217,7 @@ export default function PatientsPage() {
               variant="outline"
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage((p) => p + 1)}
+              className="cursor-pointer"
             >
               Next
             </Button>
