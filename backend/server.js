@@ -3,6 +3,7 @@ dotenv.config();
 const express = require('express');
 const dbConnection = require('./dbConfig/dbConnection');
 const authRoutes = require('./routes/authRoutes');
+ const patientRouter = require('./routes/patientRoutes')
 const morgan = require('morgan');
 
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(morgan("dev")); 
 
 app.use('/api/auth', authRoutes);
+app.use('/api',patientRouter);
 
 
 
