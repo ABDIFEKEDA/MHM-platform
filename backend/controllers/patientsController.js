@@ -1,22 +1,31 @@
-const { registerUser, loginUser } = require("../services/authService.js"); 
+const Patient = require("../models/patientsModel");
+const PatientService = require("../services/patientService");
 
- const register = async (req, res) => {
+exports.createPatient = async (req, res) => {
   try {
-    const userId = await registerUser(req.body);
-    res.status(201).json({ message: "User registered successfully", name: req.body.name });
-  } catch (error) {
-    console.error("Register error:", error);
-    res.status(500).json({ message: error.message });
+    const id = await Patient.createPatient(req.body); 
+    res.status(201).json({ message: "Patient created successfully", id });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
- const login = async (req, res) => {
+exports.addVitals = async (req, res) => {
   try {
-    const { token, role } = await loginUser(req.body);
-    res.json({ token, role });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+    const { patientId } = req.params;
+    await PatientService.addVitals(patientId, req.body); 
+    res.json({ message: "Vitals added successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
-module.exports = { register, login };
+exports.getVitals = async (req, res) => {
+  try {
+    const { patientId } = req.params;
+    const vitals = await Patient.getVitals(patientId); // ✅ matches model export
+    res.json(vitals);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
