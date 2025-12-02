@@ -1,4 +1,5 @@
 const db = require("../dbConfig/dbConnection");
+const { checkVitalsFromDB } = require("../services/alertService"); // ✅ import
 
 const createPatient = async ({
   name,
@@ -38,6 +39,9 @@ const updateVitals = async (
       weight
     ]
   );
+
+  // 🔔 After saving vitals, check for alerts
+  await checkVitalsFromDB(patient_id);
 };
 
 const getVitals = async (id) => {

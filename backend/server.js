@@ -5,6 +5,7 @@ const dbConnection = require('./dbConfig/dbConnection');
 const authRoutes = require('./routes/authRoutes');
  const patientRouter = require('./routes/patientRoutes')
 const morgan = require('morgan');
+const alerRouter = require('./routes/alertRouter');
 
 
 
@@ -20,6 +21,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api',patientRouter);
 
 
+app.use("/api/alerts", alerRouter);
+
+app.get("/", (req, res) => {
+  res.send("Maternal Health Monitoring API running...");
+});
 
 app.listen(port, ()=>{
     console.log(`server is running on the port ${port}`);
