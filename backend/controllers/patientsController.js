@@ -23,7 +23,7 @@ exports.addVitals = async (req, res) => {
 exports.getVitals = async (req, res) => {
   try {
     const { patientId } = req.params;
-    const vitals = await Patient.getVitals(patientId); // ✅ matches model export
+    const vitals = await Patient.getVitals(patientId); 
     res.json(vitals);
   } catch (err) {
     res.status(500).json({ error: err.message });

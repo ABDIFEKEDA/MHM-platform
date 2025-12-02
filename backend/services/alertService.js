@@ -1,22 +1,15 @@
-// src/services/alertService.js
-const sendAlert = async (patientId, message) => {
-  try {
-    // Here you could:
-    // 1. Save alert to database
-    // 2. Send email/SMS notification
-    console.log(`Alert for patient ${patientId}: ${message}`);
+const { createAlert, getAlertsByPatient } = require("../models/alertModel");
 
-    // Example: insert into alerts table (optional)
-    // await db.query("INSERT INTO alerts (patient_id, message) VALUES (?, ?)", [patientId, message]);
+const checkVitalsFromDB = async (patientId, vitals) => {
+  const { bp_systolic, bp_diastolic, heart_rate } = vitals;
 
-    return true;
-  } catch (error) {
-    console.error("Error sending alert:", error);
-    throw error;
+  if (bp_systolic > 140 || bp_diastolic > 90) {
+    await createAlert(patientId, "Blood Pressure", "High blood pressure detected", "high");
+  }
+
+  if (heart_rate < 60 || heart_rate > 100) {
+    await createAlert(patientId, "Heart Rate", "Abnormal heart rate detected", "medium");
   }
 };
 
-// Export the function
-module.exports = {
-  sendAlert,
-};
+module.exports = { checkVitalsFromDB, getAlertsByPatient };
