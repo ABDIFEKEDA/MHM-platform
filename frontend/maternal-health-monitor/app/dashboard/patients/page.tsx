@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import React from "react";
 import PatientsLayout from "@/components/PatientsLayout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -5,11 +7,14 @@ import { Bell, Mail } from "lucide-react";
 import { CardContent, CardHeader } from "@/components/ui/card";
 import { Card } from "@/components/ui/card";
 
-const page = () => {
+import RegisterPatientPopup from "@/components/PatientRegistrationPopUp";
+
+const Page = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <PatientsLayout>
-      <div>
-        {" "}
+      <div className="bg-gray-200">
+       
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-bold text-[#253D90] flex items-center ">
             Patients Dashboard
@@ -64,15 +69,19 @@ const page = () => {
             </CardHeader>
           </Card>
         </div>
-        <div className="p-6 mt-6 bg-white rounded-lg shadow grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="flex justify-end bg-gray-200 py-4 ">
+        {/* <Button onClick={()=>setIsOpen(true)} ></Button> */}
+        <RegisterPatientPopup isOpen={isOpen} setIsOpen={setIsOpen}/> 
+        </div>
+        <div className="p-6 mt-4 bg-white rounded-lg shadow grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card className="hover:shadow-lg transition-shadow duration-300 gradient-border">
             <CardHeader>
-              <h2 className="text-2xl font-bold mb-4 text-[#0F2B8F]">Alerts</h2>
+              <h2 className="text-2xl font-bold  text-[#0F2B8F] ">Alerts</h2>
             </CardHeader>
             <CardContent>
-              <ul className="list-disc list-inside space-y-2">
+              <ul className="space-y-2">
                 <li className="text-red-600">
-                  High blood pressure detected on 2024-06-10.
+                  <p>blood pressure detected on 2024-06-10.</p>
                 </li>
                 <li className="text-yellow-600">
                   Missed appointment on 2024-06-08.
@@ -90,14 +99,14 @@ const page = () => {
               </h2>
             </CardHeader>
             <CardContent>
-              <ul className="list-disc list-inside space-y-2">
-                <li className="text-blue-600">
+              <ul className="space-y-2 ">
+                <li className="text-gray-800">
                   New message from Dr. Abdi Fk on 2024-06-11.
                 </li>
-                <li className="text-blue-600">
+                <li className="">
                   Lab results available for review on 2024-06-09.
                 </li>
-                <li className="text-blue-600">
+                <li className="text-gray-800">
                   Upcoming appointment reminder for 2024-06-15.
                 </li>
               </ul>
@@ -110,7 +119,7 @@ const page = () => {
               </h2>
             </CardHeader>
             <CardContent>
-              <ul className="list-disc list-inside space-y-2">
+              <ul className=" space-y-2">
                 <li className="text-gray-800">
                   Message from Dr. Abdi Fk Please schedule a follow-up
                   appointment.
@@ -128,7 +137,7 @@ const page = () => {
               </h2>
             </CardHeader>
             <CardContent>
-              <ul className="list-disc list-inside space-y-2">
+              <ul className=" space-y-2">
                 <li className="text-gray-800">
                   Upcoming appointment with Dr. Abdi Fk on 2024-06-15 at 10:00
                   AM.
@@ -143,22 +152,22 @@ const page = () => {
         <h1 className="text-2xl font-bold text-[#253D90] flex items-center mt-10 ">
           Quick Actions
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 ">
-          <Card className="hover:shadow-lg transition-shadow duration-300 gradient-border py-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 cursor-pointer">
+          <Card className="hover:shadow-lg transition-shadow duration-300 gradient-border py-10 bg-gray-400">
             <CardHeader>
               <CardContent>
                 <h2 className="text-xl font-semibold ">Alert History</h2>
               </CardContent>
             </CardHeader>
           </Card>
-          <Card className="hover:shadow-lg transition-shadow duration-300 gradient-border py-10">
+          <Card className="hover:shadow-lg transition-shadow duration-300 gradient-border py-10 bg-gray-400">
             <CardHeader>
               <CardContent>
                 <h2 className="text-xl font-semibold ">View History</h2>
               </CardContent>
             </CardHeader>
           </Card>
-          <Card className="hover:shadow-lg transition-shadow duration-300 gradient-border py-10">
+          <Card className="hover:shadow-lg transition-shadow duration-300 gradient-border py-10 bg-gray-400">
             <CardHeader>
               <CardContent>
                 <h2 className="text-xl font-semibold ">Message</h2>
@@ -171,4 +180,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
