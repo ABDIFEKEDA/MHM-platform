@@ -103,7 +103,7 @@ export default function PatientsPage() {
 
   return (
     <AdminLayout>
-      <div className="p-6 bg-[#e9effb] min-h-screen">
+      <div className="p-6 bg-gray-200 min-h-screen">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-bold text-[#253D90] flex items-center ">
             List of All Patients

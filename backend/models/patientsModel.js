@@ -40,7 +40,7 @@ const updateVitals = async (
     ]
   );
 
-  // 🔔 After saving vitals, check for alerts
+
   await checkVitalsFromDB(patient_id);
 };
 
