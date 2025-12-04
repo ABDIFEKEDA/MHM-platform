@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogOverlay,
-} from "@/components/ui/dialoge"; 
+} from "@/components/ui/dialoge";   
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -33,28 +33,26 @@ function RegisterPatientPopup() {
       const token =
         typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-      const body = { ...formData }; 
-
       const res = await fetch("http://localhost:4000/api/patients", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(formData),
       });
 
+      const data = await res.json().catch(() => null); // ✅ parse once
+
       if (!res.ok) {
-        const errorData = await res.json().catch(() => ({ message: res.statusText }));
-        throw new Error(errorData.message || "Failed to register patient");
+        throw new Error(data?.message || res.statusText || "Failed to register patient");
       }
 
-      const data = await res.json();
       console.log("Patient registered:", data);
       alert("Patient registered successfully!");
     } catch (err) {
-      console.error(err);
-      alert("Error registering patient");
+      console.error("Patient registration failed:", err);
+      alert(err instanceof Error ? err.message : "Error registering patient");
     }
   };
 
