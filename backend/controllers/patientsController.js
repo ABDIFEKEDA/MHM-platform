@@ -15,8 +15,10 @@ exports.addVitals = async (req, res) => {
     const { patientId } = req.params;
     await PatientService.addVitals(patientId, req.body); 
     res.json({ message: "Vitals added successfully" });
+  
   } catch (err) {
     res.status(500).json({ error: err.message });
+    console.log(req.body);
   }
 };
 

@@ -1,6 +1,6 @@
 const db = require("../dbConfig/dbConnection");
 
-const insertVitals = async (patient_id) => {
+const insertVitals = async (patient_id, vitals) => {
   await db.query(
     "INSERT INTO vitals (patient_id, bp_systolic, bp_diastolic, heart_rate, respiratory_rate, temperature, blood_sugar, hemoglobin, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
@@ -12,7 +12,7 @@ const insertVitals = async (patient_id) => {
       vitals.temperature,
       vitals.blood_sugar,
       vitals.hemoglobin,
-      vitals.weight
+      vitals.weight,
     ]
   );
 };

@@ -4,7 +4,7 @@ const getPatientAlerts = async (req, res) => {
   try {
     const { patientId } = req.params;
     const alerts = await getAlertsByPatient(patientId);
-    res.json(alerts);   // ✅ always send response
+    res.json(alerts);   
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
