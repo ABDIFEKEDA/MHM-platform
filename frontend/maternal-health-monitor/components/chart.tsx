@@ -11,14 +11,14 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// ✅ Maternal Health Risk Data (Sample)
+
 const data = [
   { name: "Normal", value: 45 },
   { name: "Moderate Risk", value: 25 },
   { name: "High Risk", value: 10 },
 ];
 
-// ✅ Colors for Risk Levels
+
 const COLORS = [
   "#22C55E", // Green → Normal
   "#F97316", // Orange → Moderate Risk
