@@ -52,7 +52,7 @@ export default function PatientSidebar() {
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Alerts"}
           </Link>
-          <Link href="/dashboard/patients/Appointments" className={menuItemClass("/dashboard/patients/Appointments")}>
+          <Link href="/dashboard/patients/appointments" className={menuItemClass("/dashboard/patients/appointments")}>
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Appointments"}
           </Link>
