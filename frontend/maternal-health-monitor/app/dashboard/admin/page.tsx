@@ -1,10 +1,33 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import AdminLayout from "@/components/adminLayout";
-import RecentActivityFilters from "@/components/fiter";
 import DashboardChart from "@/components/chart";
 import DashboardChart2 from "@/components/chart2";
 import { Card } from "../../../components/ui/card";
 
 export default function AdminDashboard() {
+  const router = useRouter();
+  const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+
+    
+    if (!token || role !== "admin") {
+      router.push("/auth/login");
+    } else {
+      setAuthorized(true);
+    }
+  }, [router]);
+
+  if (!authorized) {
+    
+    return <p className="text-center mt-10">Redirecting...</p>;
+  }
+
   return (
     <AdminLayout>
       <div className="bg-gray-200 min-h-screen p-6 rounded-lg">
@@ -23,15 +46,13 @@ export default function AdminDashboard() {
             <p className="text-2xl font-bold">8</p>
           </div>
         </div>
-        {/* <div className="p-6 mt-6 bg-white rounded-lg shadow">
-          <RecentActivityFilters />
-        </div> */}
-        <div className="py-6  grid grid-cols-1 md:grid-cols-2 gap-4 flex justify-between">
-          <DashboardChart />
 
+        <div className="py-6 grid grid-cols-1 md:grid-cols-2 gap-4 flex justify-between">
+          <DashboardChart />
           <DashboardChart2 />
         </div>
       </div>
     </AdminLayout>
+    
   );
 }

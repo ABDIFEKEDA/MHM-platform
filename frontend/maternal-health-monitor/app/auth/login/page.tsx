@@ -40,12 +40,22 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
-       
+        // Save token + role
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
 
         alert("Login successful!");
-        router.push("/dashboard"); 
+
+       
+        if (data.role === "admin") {
+          router.push("/dashboard/admin");
+        } else if (data.role === "doctor") {
+          router.push("/dashboard/doctor");
+        } else if (data.role === "patient") {
+          router.push("/dashboard/patients");
+        } else {
+          router.push("/auth/login"); 
+        }
       } else {
         setError(data.error || data.message || "Login failed");
       }
