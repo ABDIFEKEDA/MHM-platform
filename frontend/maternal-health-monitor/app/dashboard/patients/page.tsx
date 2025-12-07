@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import PatientsLayout from "@/components/PatientsLayout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -9,8 +11,28 @@ import { Card } from "@/components/ui/card";
 
 import RegisterPatientPopup from "@/components/PatientRegistrationPopUp";
 
+
 const Page = () => {
   const [isOpen, setIsOpen] = useState(false);
+   const router = useRouter();
+    const [authorized, setAuthorized] = useState(false);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const role = localStorage.getItem("role");
+  
+      
+      if (!token || role !== "patient") {
+        router.push("/auth/login");
+      } else {
+        setAuthorized(true);
+      }
+    }, [router]);
+  
+    if (!authorized) {
+      
+      return <p className="text-center mt-10">Redirecting...</p>;
+    }
   return (
     <PatientsLayout>
       <div className="bg-gray-200">
