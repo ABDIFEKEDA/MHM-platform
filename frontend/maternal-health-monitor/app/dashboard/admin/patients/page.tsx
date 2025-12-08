@@ -4,6 +4,7 @@ import AdminLayout from "@/components/adminLayout";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import RegisterPatientPopup from "@/components/PatientRegistrationPopUp";
 import {
   Table,
   TableBody,
@@ -125,14 +126,14 @@ export default function PatientsPage() {
           </div>
         </div>
         <div className="flex justify-end mb-4">
-          <Button className="bg-yellow-800 hover:bg-blue-800 cursor-pointer">
-            Add Patients
-          </Button>
+          <div className=" cursor-pointer">
+           <RegisterPatientPopup />
+          </div>
         </div>
         <div className="bg-white rounded-2xl shadow-lg p-4">
           <Table>
             <TableHeader>
-              <TableRow className="bg-blue-50">
+              <TableRow className="">
                 <TableHead>Name</TableHead>
                 <TableHead>Age</TableHead>
                 <TableHead>Phone</TableHead>
@@ -140,9 +141,6 @@ export default function PatientsPage() {
                 <TableHead>Risk Level</TableHead>
                 <TableHead>Assigned Doctor</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-center">
-                  <Button className="cursor-pointer">Actions</Button> 
-                  </TableHead>
               </TableRow>
             </TableHeader>
 

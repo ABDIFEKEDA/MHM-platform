@@ -4,6 +4,9 @@ import AdminLayout from "@/components/adminLayout";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import RegisterDoterPopup from "@/components/doctorPopUp";
+import RecentActivityFilters from "@/components/fiter";
+import { Card,CardContent } from "@/components/ui/card";
 import {
   Table,
   TableBody,
@@ -80,7 +83,7 @@ export default function DoctorsPage() {
 
   return (
     <AdminLayout>
-      <div className="p-6 bg-gray-200 min-h-screen">
+      <div className="p-6 bg-gray-200 min-h-screen shadow-lg">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-bold text-[#253D90] flex items-center gap-2">
             List Of All Doctors
@@ -106,22 +109,24 @@ export default function DoctorsPage() {
         </div>
 
         <div className="flex justify-end mb-4">
-          <Button className="bg-yellow-800 hover:bg-yellow-400">
-            Add Doctors
-          </Button>
+          <div className="">
+            <RegisterDoterPopup />
+          </div>
         </div>
+        <Card className="shadow-sm mb-4">
+          <CardContent className="">
+            <RecentActivityFilters />
+          </CardContent>
+        </Card>
 
         <div className="bg-white rounded-2xl shadow-lg p-4">
           <Table>
             <TableHeader>
-              <TableRow className="bg-blue-50">
+              <TableRow className="">
                 <TableHead>Name</TableHead>
                 <TableHead>Specialization</TableHead>
                 <TableHead>Assigned Faculty</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead className="text-center">
-                  <Button className="cursor-pointer">Actions</Button>
-                </TableHead>
               </TableRow>
             </TableHeader>
 
