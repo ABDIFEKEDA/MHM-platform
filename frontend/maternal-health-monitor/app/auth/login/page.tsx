@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -72,12 +73,12 @@ export default function LoginPage() {
         onSubmit={handleLogin}
         className="w-full max-w-sm space-y-4 border p-6 rounded-lg shadow bg-white"
       >
-        <h1 className="text-xl font-bold text-blue-600">Login</h1>
+        <h1 className="text-xl font-bold text-yellow-600 text-center">Login</h1>
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
 
         <div>
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email"  className="mb-2">Email</Label>
           <Input
             id="email"
             type="email"
@@ -85,24 +86,29 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             required
+            className="mb-4"
           />
         </div>
 
         <div>
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password"  className="mb-2">Password</Label>
           <Input
             id="password"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••"
+            placeholder="........."
             required
+             className="mb-4"
           />
         </div>
 
         <Button type="submit" className="w-full" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
         </Button>
+        <Link href={'/auth/signup'}>
+        <h3 className="text-center text-red-600"> Don't Have account ? <span className="text-yellow-600">Register Here!</span></h3>
+        </Link>
       </form>
     </div>
   );

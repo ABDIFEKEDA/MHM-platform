@@ -6,40 +6,50 @@ export default function Navbar() {
     <header className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
-          {/* Logo / Brand */}
           <div className="flex-shrink-0">
             <Link href="/">
-              <span className="text-2xl font-bold text-blue-600">MaternalHealth</span>
+              <span className="text-2xl font-bold text-yellow-600">
+                MaternalHealth
+              </span>
             </Link>
           </div>
 
           {/* Navigation Links */}
           <nav className="hidden md:flex space-x-6">
-            <Link href="#features" className="text-gray-700 hover:text-blue-600 transition">
+            <Link
+              href="#features"
+              className="text-yellow-700 hover:text-yellow-600 transition"
+            >
               Home
             </Link>
-            <Link href="#features" className="text-gray-700 hover:text-blue-600 transition">
+            <Link
+              href="#features"
+              className="text-yellow-700 hover:text-yellow-600 transition"
+            >
               Features
             </Link>
-            <Link href="#about" className="text-gray-700 hover:text-blue-600 transition">
+            <Link
+              href="#about"
+              className="text-yellow-700 hover:text-yellow-600 transition"
+            >
               About
             </Link>
-            <Link href="#contact" className="text-gray-700 hover:text-blue-600 transition">
+            <Link
+              href="#contact"
+              className="text-yellow-700 hover:text-yellow-600 transition"
+            >
               Contact
             </Link>
           </nav>
 
-          {/* Call-to-Action Button */}
           <div className="hidden md:flex">
-            <Button className="bg-blue-600 text-white hover:bg-blue-700">
-              Get Started
+            <Button className="bg-yellow-600 text-white hover:bg-yellow-700">
+              <Link href="/auth/login">Get Started</Link>
             </Button>
           </div>
 
-          {/* Mobile Menu Button (optional) */}
           <div className="md:hidden">
             <button className="text-gray-700 hover:text-blue-600 focus:outline-none">
-              {/* You can add hamburger icon here */}
               ☰
             </button>
           </div>
