@@ -11,7 +11,7 @@ import {
 
 export default function RecentActivityFilters() {
   return (
-    <div className="w-full bg-white shadow-sm rounded-lg ">
+    <div className="w-full bg-white  rounded-lg ">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ">
         
         <Input
