@@ -33,7 +33,7 @@ function RegisterPatientPopup() {
       const token =
         typeof window !== "undefined" ? localStorage.getItem("token") : null;
 
-      const res = await fetch("http://localhost:4000/api/patients", {
+      const res = await fetch("http://localhost:4000/api/patients/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

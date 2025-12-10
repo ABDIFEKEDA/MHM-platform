@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
  const patientRouter = require('./routes/patientRoutes')
 const morgan = require('morgan');
 const alerRouter = require('./routes/alertRouter');
+const patientRoutes = require('./routes/patientRoutes');
 
 
 
@@ -22,6 +23,7 @@ app.use('/api',patientRouter);
 
 
 app.use("/api/alerts", alerRouter);
+app.use("/api/patients", patientRoutes);
 
 app.get("/", (req, res) => {
   res.send("Maternal Health Monitoring API running...");
