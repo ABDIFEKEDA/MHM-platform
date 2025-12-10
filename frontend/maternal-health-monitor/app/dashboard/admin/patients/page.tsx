@@ -13,22 +13,18 @@ import {
 import { Bell, Mail } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-
-type Patient = {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  age: number;
-  pregnancy_stage: string;
-  medical_history: string;
-};
+import RecentActivityFilters from "@/components/fiter"; // ✅ single correct import
+import Patient from "../../../type/patients";
 
 const ITEMS_PER_PAGE = 8;
 
 export default function PatientsPage() {
   const [patientsData, setPatientsData] = useState<Patient[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterStatus, setFilterStatus] = useState<string | undefined>();
+  const [filterType, setFilterType] = useState("name");
 
   useEffect(() => {
     async function fetchPatients() {
@@ -44,50 +40,53 @@ export default function PatientsPage() {
     fetchPatients();
   }, []);
 
-  const totalPages = Math.ceil(patientsData.length / ITEMS_PER_PAGE);
+  const filteredPatients = patientsData.filter((patient) => {
+    if (filterStatus && patient.status !== filterStatus) return false;
+
+    if (searchTerm) {
+      const value =
+        filterType === "email"
+          ? patient.email
+          : filterType === "phone"
+          ? patient.phone
+          : patient.name;
+      return value.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+
+    return true;
+  });
+
+  const totalPages = Math.ceil(filteredPatients.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentPatients = patientsData.slice(
+  const currentPatients = filteredPatients.slice(
     startIndex,
     startIndex + ITEMS_PER_PAGE
   );
 
-  // Handlers for buttons (stubbed for now)
-  const handleEdit = (id: number) => {
-    console.log("Edit patient:", id);
-    // TODO: open edit modal or navigate to edit page
-  };
-
-  const handleDelete = async (id: number) => {
-    console.log("Delete patient:", id);
-    
-  };
-
-  const handleViewDetails = (id: number) => {
+ 
+  const handleEdit = (id: number) => console.log("Edit patient:", id);
+  const handleDelete = async (id: number) => console.log("Delete patient:", id);
+  const handleViewDetails = (id: number) =>
     console.log("View details for patient:", id);
-    
-  };
 
   return (
     <AdminLayout>
       <div className="p-6 bg-gray-100 min-h-screen">
         <div className="p-6 bg-gray-200 min-h-screen shadow-lg">
-          
+         
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-2xl font-bold text-[#253D90] flex items-center gap-2">
               Patient Management
             </h1>
-
             <div className="flex items-center gap-5">
               <div className="relative">
                 <Bell className="w-6 h-6 text-blue-700 cursor-pointer" />
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-600 rounded-full"></span>
               </div>
-
               <div className="relative">
                 <Mail className="w-6 h-6 text-green-600 cursor-pointer" />
                 <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-600 rounded-full"></span>
               </div>
-
               <Avatar>
                 <AvatarImage src={"/avatar.png"} />
                 <AvatarFallback>AD</AvatarFallback>
@@ -95,7 +94,14 @@ export default function PatientsPage() {
             </div>
           </div>
 
-          
+          <div className="mb-4">
+            <RecentActivityFilters
+              onSearchChange={(val) => setSearchTerm(val)}
+              onStatusChange={(val) => setFilterStatus(val)}
+              onTypeChange={(val) => setFilterType(val)}
+            />
+          </div>
+
           <div className="bg-white rounded-2xl shadow-lg p-4">
             <Table>
               <TableHeader>
@@ -148,7 +154,6 @@ export default function PatientsPage() {
               </TableBody>
             </Table>
 
-            {/* Pagination */}
             <div className="flex justify-center items-center gap-4 mt-6">
               <Button
                 variant="outline"
