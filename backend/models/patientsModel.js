@@ -66,10 +66,23 @@ const getAllPatients = async () => {
     throw err;
   }
 };
+const getPatientStats = async () => {
+  try {
+    
+    const [rows] = await db.query("SELECT COUNT(*) AS total FROM patients");
+
+    return {
+      total: rows[0].total, 
+    };
+  } catch (err) {
+    throw err;
+  }
+};
 
 module.exports = {
   createPatient,
   findPatientById,
   getVitals,
-  getAllPatients
+  getAllPatients,
+  getPatientStats
 };

@@ -13,7 +13,10 @@ import {
 import { Bell, Mail } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import RecentActivityFilters from "@/components/fiter"; // ✅ single correct import
+import RecentActivityFilters from "@/components/fiter";
+import VitalsPatientPopup from "@/components/vitalsPopUp";
+import RegisterPatientPopup from "@/components/PatientRegistrationPopUp";
+import { Card, CardContent } from "@/components/ui/card";
 import Patient from "../../../type/patients";
 
 const ITEMS_PER_PAGE = 8;
@@ -25,6 +28,9 @@ export default function PatientsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState<string | undefined>();
   const [filterType, setFilterType] = useState("name");
+
+ 
+  const [stats, setStats] = useState({ total: 0, });
 
   useEffect(() => {
     async function fetchPatients() {
@@ -63,17 +69,30 @@ export default function PatientsPage() {
     startIndex + ITEMS_PER_PAGE
   );
 
- 
   const handleEdit = (id: number) => console.log("Edit patient:", id);
   const handleDelete = async (id: number) => console.log("Delete patient:", id);
   const handleViewDetails = (id: number) =>
     console.log("View details for patient:", id);
 
+  
+  useEffect(() => {
+    async function fetchStats() {
+      try {
+        const res = await fetch("http://localhost:4000/api/patients/stats");
+        const data = await res.json();
+        setStats(data);
+      } catch (err) {
+        console.error("Error fetching stats:", err);
+      }
+    }
+    fetchStats();
+  }, []);
+
   return (
     <AdminLayout>
       <div className="p-6 bg-gray-100 min-h-screen">
         <div className="p-6 bg-gray-200 min-h-screen shadow-lg">
-         
+          {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-2xl font-bold text-[#253D90] flex items-center gap-2">
               Patient Management
@@ -94,6 +113,37 @@ export default function PatientsPage() {
             </div>
           </div>
 
+        
+          <div className="flex justify-end gap-4 mt-4 mb-2">
+            <RegisterPatientPopup />
+            <VitalsPatientPopup />
+          </div>
+
+         
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <Card className="shadow-sm mb-4">
+              <CardContent>
+                <h1 className="text-lg font-semibold">Total Patients</h1>
+                <h3 className="text-2xl font-bold">{stats.total}</h3>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-sm mb-4">
+              <CardContent>
+                <h1 className="text-lg font-semibold">Risk Patients</h1>
+                <h3 className="text-2xl font-bold">risk level</h3>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-sm mb-4">
+              <CardContent>
+                <h1 className="text-lg font-semibold">Upcoming Appointments</h1>
+                <h3 className="text-2xl font-bold">upComing Task</h3>
+              </CardContent>
+            </Card>
+          </div>
+
+         
           <div className="mb-4">
             <RecentActivityFilters
               onSearchChange={(val) => setSearchTerm(val)}
@@ -102,6 +152,7 @@ export default function PatientsPage() {
             />
           </div>
 
+          {/* Table */}
           <div className="bg-white rounded-2xl shadow-lg p-4">
             <Table>
               <TableHeader>
@@ -154,6 +205,7 @@ export default function PatientsPage() {
               </TableBody>
             </Table>
 
+           
             <div className="flex justify-center items-center gap-4 mt-6">
               <Button
                 variant="outline"

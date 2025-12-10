@@ -44,3 +44,12 @@ exports.getPatients = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch patients" });
   }
 };
+exports.getPatientStats = async (req, res) => {
+  try {
+    const stats = await Patient.getPatientStats();
+    res.json(stats);
+  } catch (err) {
+    console.error("Error fetching patient stats:", err);
+    res.status(500).json({ error: "Failed to fetch patient stats" });
+  }
+};
