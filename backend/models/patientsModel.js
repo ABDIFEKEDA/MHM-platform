@@ -54,8 +54,22 @@ const getVitals = async (id) => {
   return rows;
 };
 
+const getAllPatients = async () => {
+  try {
+    const [rows] = await db.execute(
+      `SELECT id, name, email, phone, age, pregnancy_stage, medical_history 
+       FROM patients ORDER BY id ASC`
+    );
+    return rows; 
+  } catch (err) {
+    console.error("Error in getAllPatients:", err);
+    throw err;
+  }
+};
+
 module.exports = {
   createPatient,
   findPatientById,
   getVitals,
+  getAllPatients
 };

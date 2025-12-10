@@ -1,6 +1,6 @@
 const db = require("../dbConfig/dbConnection");
 
-
+// Create new alert
 const createAlert = async (patientId, type, message, severity, status = "active") => {
   const [result] = await db.query(
     `INSERT INTO alerts 
@@ -11,13 +11,22 @@ const createAlert = async (patientId, type, message, severity, status = "active"
   return result.insertId;
 };
 
-
+// Get all alerts for a patient
 const getAlertsByPatient = async (patientId) => {
   const [rows] = await db.query(
     "SELECT * FROM alerts WHERE patient_id = ? ORDER BY created_at DESC",
     [patientId]
   );
   return rows;
+};
+
+// Get single alert by ID
+const getAlertById = async (alertId) => {
+  const [rows] = await db.query(
+    "SELECT * FROM alerts WHERE id = ?",
+    [alertId]
+  );
+  return rows[0];
 };
 
 
@@ -29,4 +38,19 @@ const updateAlertStatus = async (alertId, status) => {
   return result.affectedRows > 0;
 };
 
-module.exports = { createAlert, getAlertsByPatient, updateAlertStatus };
+
+const deleteAlert = async (alertId) => {
+  const [result] = await db.query(
+    "DELETE FROM alerts WHERE id = ?",
+    [alertId]
+  );
+  return result.affectedRows > 0;
+};
+
+module.exports = { 
+  createAlert, 
+  getAlertsByPatient, 
+  getAlertById, 
+  updateAlertStatus, 
+  deleteAlert 
+};

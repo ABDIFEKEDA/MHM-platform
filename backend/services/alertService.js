@@ -1,5 +1,12 @@
-const { createAlert, getAlertsByPatient } = require("../models/alertModel");
+const { 
+  createAlert, 
+  getAlertsByPatient, 
+  getAlertById, 
+  updateAlertStatus, 
+  deleteAlert 
+} = require("../models/alertModel");
 
+// Business logic: check vitals and auto-create alerts
 const checkVitalsFromDB = async (patientId, vitals) => {
   const { bp_systolic, bp_diastolic, heart_rate } = vitals;
 
@@ -12,4 +19,10 @@ const checkVitalsFromDB = async (patientId, vitals) => {
   }
 };
 
-module.exports = { checkVitalsFromDB, getAlertsByPatient };
+module.exports = { 
+  checkVitalsFromDB, 
+  getAlertsByPatient, 
+  getAlertById, 
+  updateAlertStatus, 
+  deleteAlert 
+};
