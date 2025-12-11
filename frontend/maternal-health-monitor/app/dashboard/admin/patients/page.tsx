@@ -16,8 +16,10 @@ import { Button } from "@/components/ui/button";
 import RecentActivityFilters from "@/components/fiter";
 import VitalsPatientPopup from "@/components/vitalsPopUp";
 import RegisterPatientPopup from "@/components/PatientRegistrationPopUp";
+import PatientDetailsPopup from "@/components/PatientsDetailPopUp";
 import { Card, CardContent } from "@/components/ui/card";
 import Patient from "../../../type/patients";
+import EditPatientPopup from "@/components/editPatientsPopUp";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -29,9 +31,11 @@ export default function PatientsPage() {
   const [filterStatus, setFilterStatus] = useState<string | undefined>();
   const [filterType, setFilterType] = useState("name");
 
- 
-  const [stats, setStats] = useState({ total: 0, });
-
+  const [stats, setStats] = useState({ total: 0 });
+  const [selectedPatientId, setSelectedPatientId] = useState<number | null>(
+    null
+  );
+  const [editOpen, setEditOpen] = useState(false);
   useEffect(() => {
     async function fetchPatients() {
       try {
@@ -69,12 +73,15 @@ export default function PatientsPage() {
     startIndex + ITEMS_PER_PAGE
   );
 
-  const handleEdit = (id: number) => console.log("Edit patient:", id);
+  const handleEdit = (id: number) => {
+    console.log("Edit patient:", id);
+    setSelectedPatientId(id);
+    setEditOpen(true);
+  };
   const handleDelete = async (id: number) => console.log("Delete patient:", id);
   const handleViewDetails = (id: number) =>
     console.log("View details for patient:", id);
 
-  
   useEffect(() => {
     async function fetchStats() {
       try {
@@ -112,13 +119,11 @@ export default function PatientsPage() {
             </div>
           </div>
 
-        
           <div className="flex justify-end gap-4 mt-4 mb-2">
             <RegisterPatientPopup />
             <VitalsPatientPopup />
           </div>
 
-         
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <Card className="shadow-sm mb-4">
               <CardContent>
@@ -142,7 +147,6 @@ export default function PatientsPage() {
             </Card>
           </div>
 
-         
           <div className="mb-4">
             <RecentActivityFilters
               onSearchChange={(val) => setSearchTerm(val)}
@@ -151,7 +155,6 @@ export default function PatientsPage() {
             />
           </div>
 
-        
           <div className="bg-white rounded-2xl shadow-lg p-4">
             <Table>
               <TableHeader>
@@ -177,13 +180,24 @@ export default function PatientsPage() {
                     <TableCell>{patient.pregnancy_stage}</TableCell>
                     <TableCell>{patient.medical_history}</TableCell>
                     <TableCell className="flex gap-2 justify-center">
-                      <Button
-                        size="sm"
-                        className="bg-yellow-600 hover:bg-yellow-700"
-                        onClick={() => handleEdit(patient.id)}
-                      >
-                        Edit
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button
+                          variant="outline"
+                          onClick={() => handleEdit(patient.id)}
+                          className="bg-yellow-600 hover:bg-yellow-700 text-white cursor-pointer"
+                        >
+                          Edit
+                        </Button>
+
+                        {/* Render the popup only when selected */}
+                        {selectedPatientId === patient.id && (
+                          <EditPatientPopup
+                            patient={patient}
+                            open={editOpen}
+                            onOpenChange={setEditOpen}
+                          />
+                        )}
+                      </div>
                       <Button
                         size="sm"
                         className="bg-red-600 hover:bg-red-700"
@@ -191,20 +205,17 @@ export default function PatientsPage() {
                       >
                         Delete
                       </Button>
-                      <Button
-                        size="sm"
-                        className="bg-blue-600 hover:bg-blue-700"
+                      <div
                         onClick={() => handleViewDetails(patient.id)}
                       >
-                        View Details
-                      </Button>
+                        <PatientDetailsPopup patientId={patient.id} />
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
 
-           
             <div className="flex justify-center items-center gap-4 mt-6">
               <Button
                 variant="outline"

@@ -53,3 +53,19 @@ exports.getPatientStats = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch patient stats" });
   }
 };
+
+exports.updatePatient = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email, phone, age, pregnancy_stage, medical_history } = req.body;
+
+    await db.query(
+      "UPDATE patients SET name=?, email=?, phone=?, age=?, pregnancy_stage=?, medical_history=? WHERE id=?",
+      [name, email, phone, age, pregnancy_stage, medical_history, id]
+    );
+
+    res.json({ message: "Patient updated successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Error updating patient", error: err.message });
+  }
+};
