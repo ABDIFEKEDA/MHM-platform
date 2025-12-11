@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import {
   Dialog,
@@ -12,8 +13,11 @@ import {
 } from "@/components/ui/dialoge";   
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 
 function RegisterPatientPopup() {
+  const { toast } = useToast();
+  const [open, setOpen] = useState(false);   
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -42,25 +46,39 @@ function RegisterPatientPopup() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json().catch(() => null); // ✅ parse once
+      const data = await res.json().catch(() => null); 
 
       if (!res.ok) {
         throw new Error(data?.message || res.statusText || "Failed to register patient");
       }
 
       console.log("Patient registered:", data);
-      alert("Patient registered successfully!");
+
+      toast({
+        title: "Success",
+        description: "Patient registered successfully!",
+        variant: "success",
+      });
+
+      setOpen(false);   
+
     } catch (err) {
       console.error("Patient registration failed:", err);
-      alert(err instanceof Error ? err.message : "Error registering patient");
+      toast({
+        title: "Error",
+        description: err instanceof Error ? err.message : "Error registering patient",
+        variant: "destructive",
+      });
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogOverlay className="fixed inset-0 bg-black/30 backdrop-blur-md" />
       <DialogTrigger asChild>
-        <Button className="cursor-pointer">Register Patient</Button>
+        <Button className="cursor-pointer" onClick={() => setOpen(true)}>
+          Register Patient
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -82,7 +100,7 @@ function RegisterPatientPopup() {
 
           <DialogFooter>
             <div className="flex justify-center gap-4">
-              <Button variant="outline" type="button" className="cursor-pointer">
+              <Button variant="outline" type="button" className="cursor-pointer" onClick={() => setOpen(false)}>
                 Cancel
               </Button>
               <Button type="submit" className="cursor-pointer">Submit</Button>

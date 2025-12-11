@@ -19,7 +19,7 @@ import RegisterPatientPopup from "@/components/PatientRegistrationPopUp";
 import { Card, CardContent } from "@/components/ui/card";
 import Patient from "../../../type/patients";
 
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 10;
 
 export default function PatientsPage() {
   const [patientsData, setPatientsData] = useState<Patient[]>([]);
@@ -92,7 +92,6 @@ export default function PatientsPage() {
     <AdminLayout>
       <div className="p-6 bg-gray-100 min-h-screen">
         <div className="p-6 bg-gray-200 min-h-screen shadow-lg">
-          {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-2xl font-bold text-[#253D90] flex items-center gap-2">
               Patient Management
@@ -152,7 +151,7 @@ export default function PatientsPage() {
             />
           </div>
 
-          {/* Table */}
+        
           <div className="bg-white rounded-2xl shadow-lg p-4">
             <Table>
               <TableHeader>
