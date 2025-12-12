@@ -1,28 +1,25 @@
-const { 
-  createAlert, 
-  getAlertsByPatient, 
-  getAlertById, 
-  updateAlertStatus, 
-  deleteAlert 
-} = require("../models/alertModel");
+const thresholds = require("../dbConfig/theshold");
 
-// Business logic: check vitals and auto-create alerts
-const checkVitalsFromDB = async (patientId, vitals) => {
-  const { bp_systolic, bp_diastolic, heart_rate } = vitals;
+function calculateAlerts(vitals) {
+  const alerts = [];
 
-  if (bp_systolic > 140 || bp_diastolic > 90) {
-    await createAlert(patientId, "Blood Pressure", "High blood pressure detected", "high");
+  if (vitals.bp_systolic > thresholds.bp_systolic.max) {
+    alerts.push({ type: "Blood Pressure", message: "Systolic too high", severity: "high" });
+  }
+  if (vitals.bp_diastolic > thresholds.bp_diastolic.max) {
+    alerts.push({ type: "Blood Pressure", message: "Diastolic too high", severity: "high" });
+  }
+  if (vitals.heart_rate < thresholds.heart_rate.min || vitals.heart_rate > thresholds.heart_rate.max) {
+    alerts.push({ type: "Heart Rate", message: "Abnormal heart rate", severity: "medium" });
+  }
+  if (vitals.temperature < thresholds.temperature.min || vitals.temperature > thresholds.temperature.max) {
+    alerts.push({ type: "Temperature", message: "Abnormal temperature", severity: "medium" });
+  }
+  if (vitals.hemoglobin < thresholds.hemoglobin.min) {
+    alerts.push({ type: "Hemoglobin", message: "Low hemoglobin", severity: "medium" });
   }
 
-  if (heart_rate < 60 || heart_rate > 100) {
-    await createAlert(patientId, "Heart Rate", "Abnormal heart rate detected", "medium");
-  }
-};
+  return alerts;
+}
 
-module.exports = { 
-  checkVitalsFromDB, 
-  getAlertsByPatient, 
-  getAlertById, 
-  updateAlertStatus, 
-  deleteAlert 
-};
+module.exports = { calculateAlerts };

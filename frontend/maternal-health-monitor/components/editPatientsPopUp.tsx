@@ -80,7 +80,7 @@ function EditPatientPopup({ patient }: { patient: Patients }) {
       <DialogContent className="rounded-lg shadow-xl bg-white">
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold text-gray-800">
-            Edit 
+            Edit  patients Details
           </DialogTitle>
           <DialogDescription className="text-sm text-gray-500">
             Update patient details below.
