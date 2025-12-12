@@ -1,20 +1,36 @@
 const db = require("../dbConfig/dbConnection");
+const { checkVitalsFromDB } = require("../services/alertService"); 
+
 
 const insertVitals = async (patient_id, vitals) => {
+  const {
+    bp_systolic,
+    bp_diastolic,
+    heart_rate,
+    respiratory_rate,
+    temperature,
+    blood_sugar,
+    hemoglobin,
+    weight,
+  } = vitals;
+
   await db.query(
     "INSERT INTO vitals (patient_id, bp_systolic, bp_diastolic, heart_rate, respiratory_rate, temperature, blood_sugar, hemoglobin, weight) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
     [
       patient_id,
-      vitals.bp_systolic,
-      vitals.bp_diastolic,
-      vitals.heart_rate,
-      vitals.respiratory_rate,
-      vitals.temperature,
-      vitals.blood_sugar,
-      vitals.hemoglobin,
-      vitals.weight,
+      bp_systolic,
+      bp_diastolic,
+      heart_rate,
+      respiratory_rate,
+      temperature,
+      blood_sugar,
+      hemoglobin,
+      weight,
     ]
   );
+
+ 
+  await checkVitalsFromDB(patient_id, vitals);
 };
 
 const getVitals = async (patientId) => {
