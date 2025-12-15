@@ -59,9 +59,8 @@ export default function AdminDashboard() {
       console.log("Connected to socket:", socket.id);
     });
 
-    // Listen for new notifications in real time
     socket.on("adminNotification", (data: Notification) => {
-      setNotifications((prev) => [data, ...prev]); // prepend new notification
+      setNotifications((prev) => [data, ...prev]);
     });
 
     return () => {
@@ -83,7 +82,6 @@ export default function AdminDashboard() {
           </h1>
 
           <div className="flex items-center gap-5">
-            {/* 🔔 Bell with dropdown */}
             <div className="relative">
               <Bell
                 className="w-6 h-6 text-blue-700 cursor-pointer"
@@ -100,7 +98,9 @@ export default function AdminDashboard() {
                   <h3 className="text-sm font-semibold mb-2">Notifications</h3>
                   <ul>
                     {notifications.length === 0 ? (
-                      <li className="text-xs text-gray-500">No notifications</li>
+                      <li className="text-xs text-gray-500">
+                        No notifications
+                      </li>
                     ) : (
                       notifications.map((n, i) => (
                         <li
