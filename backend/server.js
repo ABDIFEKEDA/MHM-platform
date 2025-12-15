@@ -10,6 +10,7 @@ const morgan = require('morgan');
 const alerRouter = require('./routes/alertRouter');
 const patientRoutes = require('./routes/patientRoutes');
 const notificationRouter = require('./routes/notificationRouter')
+const messageRouter = require('./routes/messageRouter');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
   req.io = io;
   next();
 });
+
 io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);
 
@@ -46,7 +48,7 @@ app.use(morgan("dev"));
 app.use('/api/auth', authRoutes);
 app.use('/api',patientRouter);
 app.use("/api/notifications", notificationRouter)
-
+app.use('/api/messages',messageRouter);
 
 app.use("/api/alerts", alerRouter);
 app.use("/api/patients", patientRoutes);
