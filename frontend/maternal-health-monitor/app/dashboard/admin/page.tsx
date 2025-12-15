@@ -23,7 +23,7 @@ export default function AdminDashboard() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
-  // Fetch notifications from backend on mount
+ 
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
@@ -67,6 +67,7 @@ export default function AdminDashboard() {
       socket.off("adminNotification");
       socket.disconnect();
     };
+    
   }, [router]);
 
   if (!authorized) {
