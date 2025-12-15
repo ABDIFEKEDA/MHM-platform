@@ -1,5 +1,5 @@
-const { registerUser, loginUser } = require("../services/authService.js");
-const { saveNotification } = require("../models/notificationModel"); // ✅ import model
+const { registerUser, loginUser } = require("../services/authService");
+const { saveNotification } = require("../models/notificationModel");
 
 const register = async (req, res) => {
   try {
@@ -7,17 +7,17 @@ const register = async (req, res) => {
 
     const notif = {
       type: "register",
-      user: newUser.name,   // make sure this field exists (could be newUser.username or newUser.email)
+      user: newUser.name,
       time: new Date()
     };
 
-    // ✅ Save to DB
     await saveNotification(notif.user, notif.type, notif.time);
-
-    // ✅ Emit to admins
     req.io.to("adminRoom").emit("adminNotification", notif);
 
-    res.status(201).json({ message: "User registered successfully", user: newUser });
+    res.status(201).json({
+      message: "User registered successfully",
+      user: newUser
+    });
   } catch (error) {
     console.error("Error in register:", error);
     res.status(500).json({ message: error.message });
@@ -30,7 +30,7 @@ const login = async (req, res) => {
 
     const notif = {
       type: "login",
-      user: name,   // make sure loginUser returns a name field
+      user: name,
       time: new Date()
     };
 

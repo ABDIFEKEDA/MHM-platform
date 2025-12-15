@@ -148,7 +148,7 @@ export default function AdminDashboard() {
       <div className="space-y-6">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dotors Dashboard</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Doctors Dashboard</h1>
           <p className="text-gray-600">patients overview </p>
         </div>
 

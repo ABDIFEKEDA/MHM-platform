@@ -5,8 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function SignupPage() {
+  const {toast} = useToast()
   const router = useRouter();
   const [form, setForm] = useState({
     name: "",
@@ -33,7 +35,10 @@ export default function SignupPage() {
       const data = await res.json();
 
       if (res.ok) {
-        alert("Signup successful!");
+        toast({
+          description: "user registered successfully!",
+          variant: "success",
+        })
         router.push("/auth/login"); 
       } else {
         setError(data.error || "Signup failed");
