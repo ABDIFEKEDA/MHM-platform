@@ -60,7 +60,7 @@ export default function PatientSidebar() {
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Health Records"}
           </Link>
-          <Link href="/dashboard/patients/Messages" className={menuItemClass("/admin/appointments")}>
+          <Link href="/dashboard/patients/Messages" className={menuItemClass("/dashboard/patients/Messages")}>
             <CalendarIcon className="w-6 h-6" />
             {!collapsed && "Messages"}
           </Link>

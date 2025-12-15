@@ -71,6 +71,10 @@ export default function AdminSidebar() {
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "doctors-Management"}
           </Link>
+          <Link href="/dashboard/admin/message" className={menuItemClass("dashboard/admin/message")}>
+            <UsersIcon className="w-6 h-6" />
+            {!collapsed && "message"}
+          </Link>
           <Link href="/dashboard/admin/profile" className={menuItemClass("/dashboard/admin/profile")}>
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "profile"}

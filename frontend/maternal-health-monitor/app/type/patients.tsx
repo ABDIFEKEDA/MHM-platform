@@ -1,4 +1,4 @@
-type Patient = {
+export type Patient = {
   id: number;
   name: string;
   email: string;
@@ -6,6 +6,16 @@ type Patient = {
   age: number;
   pregnancy_stage: string;
   medical_history: string;
-  status?: string; 
+  status?: string;
 };
-export default Patient;
+
+export type Message = {
+  sender: string;
+  content: string;
+  time: string;
+};
+export type ChatProps = {
+  currentUser: string;
+  receiver: string;
+
+};
