@@ -5,7 +5,13 @@ const dbConnection = require("../dbConfig/dbConnection");
     "INSERT INTO users(name, email, password, role, phone) VALUES(?, ?, ?, ?, ?)",
     [name, email, password, role, phone]
   );
-  return results.insertId;
+  return {
+    id: results.insertId,
+    name,
+    email,
+    role,
+    phone
+  }
 };
 
  const findUserByEmail = async (email)=>{

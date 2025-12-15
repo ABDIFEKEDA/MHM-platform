@@ -4,6 +4,8 @@ const generateTokens = require("../utils/generateTokens");
 
 const registerUser = async ({ name, email, password, role, phone }) => {
   const hashedPassword = await bcrypt.hash(password, 10);
+
+  // createUser should insert and return the new user’s ID
   const userId = await createUser(
     name,
     email,
@@ -11,7 +13,9 @@ const registerUser = async ({ name, email, password, role, phone }) => {
     role || "patient",
     phone
   );
-  return userId;
+
+  // return full user object for controllers
+  return { id: userId, name, email, role: role || "patient", phone };
 };
 
 const loginUser = async ({ email, password }) => {
@@ -22,7 +26,7 @@ const loginUser = async ({ email, password }) => {
   if (!isMatch) throw new Error("Invalid credentials");
 
   const token = generateTokens(user.id, user.role);
-  return { token, role: user.role };
+  return { token, role: user.role, name: user.name }; // ✅ include name
 };
 
 module.exports = { registerUser, loginUser };

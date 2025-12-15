@@ -124,10 +124,16 @@ export default function PatientsPage() {
             <VitalsPatientPopup />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <Card className="shadow-sm mb-4">
               <CardContent>
                 <h1 className="text-lg font-semibold">Total Patients</h1>
+                <h3 className="text-2xl font-bold">{stats.total}</h3>
+              </CardContent>
+            </Card>
+            <Card className="shadow-sm mb-4">
+              <CardContent>
+                <h1 className="text-lg font-semibold">Total Doctors</h1>
                 <h3 className="text-2xl font-bold">{stats.total}</h3>
               </CardContent>
             </Card>

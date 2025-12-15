@@ -6,8 +6,10 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function LoginPage() {
+  const { toast } = useToast();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +20,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError(null);
 
-    // ✅ Email validation
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setError("Please enter a valid email address.");
@@ -41,11 +43,14 @@ export default function LoginPage() {
       const data = await res.json();
 
       if (res.ok) {
-        // Save token + role
+        
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);
 
-        alert("Login successful!");
+        toast({
+        description: "user Login successfully!",
+        variant: "success",
+      });
 
        
         if (data.role === "admin") {
