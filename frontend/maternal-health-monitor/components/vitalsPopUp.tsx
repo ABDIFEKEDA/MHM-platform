@@ -13,8 +13,10 @@ import {
 } from "@/components/ui/dialoge"; 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useToast } from "./ui/use-toast";
 
 function VitalsPatientPopup() {
+  const {toast} = useToast();
   const [formData, setFormData] = useState({
     patient_id: "",
     bp_systolic: "",
@@ -58,7 +60,11 @@ function VitalsPatientPopup() {
 
       const data = await res.json();
       console.log("Vitals registered:", data);
-      alert("Vitals registered successfully!");
+      toast({
+        description: "Vitals registered successfully!",
+        variant: "success"
+      })
+      
     } catch (err) {
       console.error(err);
       alert("Error registering vitals");
