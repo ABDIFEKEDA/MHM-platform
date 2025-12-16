@@ -85,7 +85,7 @@ function EditPatientPopup({
       body: JSON.stringify(formData),
     });
 
-    const data = await res.json().catch(() => ({})); // ✅ only once
+    const data = await res.json().catch(() => ({})); 
 
     if (!res.ok) {
       throw new Error(data.message || `HTTP ${res.status}: Failed to update patient`);
