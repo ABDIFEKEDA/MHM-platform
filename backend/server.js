@@ -46,7 +46,6 @@ const port = 4000;
 
 app.use(cors({
   origin: "http://localhost:3000",
-  methods: ["GET", "POST"],
   credentials: true
 }));
 
@@ -59,6 +58,7 @@ app.use("/api/notifications", notificationRouter);
 app.use('/api/messages', messageRouter);
 app.use("/api/alerts", alerRouter);
 app.use("/api/patients", patientRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Maternal Health Monitoring API running...");
