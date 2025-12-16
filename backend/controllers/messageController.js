@@ -1,29 +1,48 @@
-const { saveMessages, getMessages } = require("../models/messageModel");
+const { saveMessage, getMessages } = require("../models/messageModel");
 
-const sendMessages = async (req, res) => {
+const sendMessage = async (req, res) => {
   try {
-    const { sender, receiver, content } = req.body;
-    const time = new Date();
-    if(!sender || !content){
-        res.status(400).json("All Fields are required !")
+    const { conversation_id, sender_id, sender_name, content, is_me = false } = req.body;
+
+    if (!conversation_id || !sender_id || !content) {
+      return res.status(400).json({ msg: "conversation_id, sender_id, and content are required!" });
     }
-    await saveMessages(sender, receiver, content, time);
-    req.io.to(receiver).emit("newMessage", { sender, content, time });
-    res.status(201).json({ msg: "message send succesfully !" });
+
+    const is_read = false;
+
+    const message = {
+      conversation_id,
+      sender_id,
+      sender_name,
+      content,
+      is_read,
+      is_me,
+    };
+
+    const newId = await saveMessage(message);
+
+    req.io.to(conversation_id.toString()).emit("newMessage", { ...message, id: newId });
+
+    res.status(201).json({ msg: "Message sent successfully!", message: { ...message, id: newId } });
   } catch (error) {
-    res.status(500).json({ msg: "error sending messages:", error });
+    console.error("Error sending message:", error);
+    res.status(500).json({ msg: "Error sending message", error });
   }
 };
 
 const fetchMessages = async (req, res) => {
   try {
-    const { sender, receiver } = req.query;
-    const messages = await getMessages(sender, receiver);
+    const { conversation_id } = req.params;  
+
+    if (!conversation_id) {
+      return res.status(400).json({ msg: "conversation_id is required!" });
+    }
+
+    const messages = await getMessages(conversation_id);
     res.json(messages);
   } catch (error) {
-    res
-      .status(500)
-      .json({ msg: "error fetching messages", error: error.messages });
+    console.error("Error fetching messages:", error);
+    res.status(500).json({ msg: "Error fetching messages", error });
   }
 };
-module.exports = { sendMessages, fetchMessages };
+module.exports = { sendMessage, fetchMessages };
