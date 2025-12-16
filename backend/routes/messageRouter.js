@@ -6,6 +6,6 @@ const messageRouter = Router();
 
 
 messageRouter.post('/', sendMessage);
-messageRouter.get('/:conversation_id', fetchMessages)
+messageRouter.get('/conversation_id', fetchMessages)
 
 module.exports = messageRouter;

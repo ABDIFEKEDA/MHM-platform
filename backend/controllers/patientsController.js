@@ -1,3 +1,4 @@
+const dbConnection = require("../dbConfig/dbConnection");
 const Patient = require("../models/patientsModel");
 const PatientService = require("../services/patientService");
 
@@ -59,10 +60,14 @@ exports.updatePatient = async (req, res) => {
     const { id } = req.params;
     const { name, email, phone, age, pregnancy_stage, medical_history } = req.body;
 
-    await db.query(
+    const [result] = await dbConnection.query(
       "UPDATE patients SET name=?, email=?, phone=?, age=?, pregnancy_stage=?, medical_history=? WHERE id=?",
       [name, email, phone, age, pregnancy_stage, medical_history, id]
     );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
 
     res.json({ message: "Patient updated successfully" });
   } catch (err) {
