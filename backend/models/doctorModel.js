@@ -8,4 +8,8 @@ const createDoctor = async ({ user_id, specialization, license_number, hospital,
   return result.insertId; 
 };
 
-module.exports = { createDoctor };
+const getAllDoctors = async()=>{
+    const [rows]=  await dbConnection.query('SELECT * FROM doctors');
+    return rows;
+}
+module.exports = { createDoctor, getAllDoctors };
