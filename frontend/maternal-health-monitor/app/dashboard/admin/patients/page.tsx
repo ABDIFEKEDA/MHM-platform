@@ -21,7 +21,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Patient from "../../../type/patients";
 import EditPatientPopup from "@/components/editPatientsPopUp";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 8;
 
 export default function PatientsPage() {
   const [patientsData, setPatientsData] = useState<Patient[]>([]);
@@ -106,7 +106,7 @@ export default function PatientsPage() {
   const handleDelete = async (id: number) => {
     if (
       !confirm(
-        "Are you sure you want to delete this patient? This action cannot be undone."
+        "Are you sure you want to delete this patient? "
       )
     ) {
       return;
