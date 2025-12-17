@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "./ui/use-toast";
 
 function VitalsPatientPopup() {
+  const [open, setOpen] = useState(false);   
   const {toast} = useToast();
   const [formData, setFormData] = useState({
     patient_id: "",
@@ -64,6 +65,7 @@ function VitalsPatientPopup() {
         description: "Vitals registered successfully!",
         variant: "success"
       })
+      setOpen(false)
       
     } catch (err) {
       console.error(err);

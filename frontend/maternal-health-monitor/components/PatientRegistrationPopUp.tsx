@@ -55,7 +55,6 @@ function RegisterPatientPopup() {
       console.log("Patient registered:", data);
 
       toast({
-        title: "Success",
         description: "Patient registered successfully!",
         variant: "success",
       });
