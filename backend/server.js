@@ -13,6 +13,7 @@ const notificationRouter = require('./routes/notificationRouter');
 const messageRouter = require('./routes/messageRouter');
 const doctorRouter = require('./routes/doctorRoutes');
 const router = require('./routes/adminRouter')
+const appointmentRouter = require('./routes/appointmentRouter')
 
 const app = express();
 const cors = require('cors');
@@ -62,6 +63,7 @@ app.use("/api/alerts", alerRouter);
 app.use("/api/patients", patientRoutes);
 app.use("/api/doctors", doctorRouter);
 app.use("/api/admin/doctor", router);
+app.use("/api/", appointmentRouter)
 
 
 app.get("/", (req, res) => {
