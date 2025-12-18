@@ -34,7 +34,7 @@ function AppointmentPopup() {
     <Dialog>
       <DialogOverlay className="fixed inset-0 bg-black/30 backdrop-blur-md" />
       <DialogTrigger asChild>
-        <Button className="cursor-pointer p-6">+ New Appointment</Button>
+        <Button className="cursor-pointer p-6 bg-[#0F2B8F]">+ New Appointment</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

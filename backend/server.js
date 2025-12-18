@@ -12,6 +12,7 @@ const patientRoutes = require('./routes/patientRoutes');
 const notificationRouter = require('./routes/notificationRouter');
 const messageRouter = require('./routes/messageRouter');
 const doctorRouter = require('./routes/doctorRoutes');
+const router = require('./routes/adminRouter')
 
 const app = express();
 const cors = require('cors');
@@ -60,6 +61,7 @@ app.use('/api/messages', messageRouter);
 app.use("/api/alerts", alerRouter);
 app.use("/api/patients", patientRoutes);
 app.use("/api/doctors", doctorRouter);
+app.use("/api/admin/doctor", router);
 
 
 app.get("/", (req, res) => {
