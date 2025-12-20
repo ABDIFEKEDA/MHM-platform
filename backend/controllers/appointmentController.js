@@ -17,7 +17,7 @@ const appointmentController = {
     const data = req.body;
 
     try {
-      const result = await ap(data);
+      const result = await appointment(data);
 
       const mailOptions = {
         from: process.env.EMAIL_USER,

@@ -52,15 +52,11 @@ export default function DoctorSideBar() {
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Alerts"}
           </Link>
-          <Link href="/dashboard/patients/appointments" className={menuItemClass("/dashboard/patients/appointments")}>
+          <Link href="/dashboard/doctors/appointments" className={menuItemClass("/dashboard/doctors/appointments")}>
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Appointments"}
           </Link>
-          <Link href="/dashboard/patients/Health Records" className={menuItemClass("/dashboard/admin/profile")}>
-            <UsersIcon className="w-6 h-6" />
-            {!collapsed && "Health Records"}
-          </Link>
-          <Link href="/dashboard/patients/Messages" className={menuItemClass("/admin/appointments")}>
+          <Link href="/dashboard/doctors/Messages" className={menuItemClass("/dashboard/doctors/message")}>
             <CalendarIcon className="w-6 h-6" />
             {!collapsed && "Messages"}
           </Link>
