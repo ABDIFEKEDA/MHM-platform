@@ -13,7 +13,7 @@ router.get("/dashboard/patient", protect(["patient"]), (req, res) => {
   res.send("Patient Dashboard");
 });
 
-router.get("/dashboard/doctor", protect(["doctor"]), (req, res) => {
+router.get("/dashboard/doctors", protect(["doctor"]), (req, res) => {
   res.send("Doctor Dashboard");
 });
 
