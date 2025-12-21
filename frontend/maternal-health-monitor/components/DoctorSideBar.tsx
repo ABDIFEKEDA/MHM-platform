@@ -48,7 +48,7 @@ export default function DoctorSideBar() {
             <HomeIcon className="w-6 h-6" />
             {!collapsed && "Dashboard"}
           </Link>
-          <Link href="/dashboard/doctors" className={menuItemClass("/dashboard/patients/Alerts")}>
+          <Link href="/dashboard/doctors/Alerts" className={menuItemClass("/dashboard/doctors/Alerts")}>
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Alerts"}
           </Link>
@@ -56,11 +56,11 @@ export default function DoctorSideBar() {
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Appointments"}
           </Link>
-          <Link href="/dashboard/doctors/Messages" className={menuItemClass("/dashboard/doctors/message")}>
+          <Link href="/dashboard/doctors/messages" className={menuItemClass("/dashboard/doctors/messages")}>
             <CalendarIcon className="w-6 h-6" />
             {!collapsed && "Messages"}
           </Link>
-          <Link href="/dashboard/patients/notification" className={menuItemClass("/admin/appointments")}>
+          <Link href="/dashboard/doctors/notifications" className={menuItemClass("/dashboard/doctors/notifications")}>
             <CalendarIcon className="w-6 h-6" />
             {!collapsed && "notification"}
           </Link>
@@ -93,7 +93,7 @@ export default function DoctorSideBar() {
             )}
           </div>
 
-          <Link href="/dashboard/patients/settings" className={menuItemClass("/admin/setting")}>
+          <Link href="/dashboard/doctors/settings" className={menuItemClass("/doctors/setting")}>
             <Cog6ToothIcon className="w-6 h-6" />
             {!collapsed && "Settings"}
           </Link>

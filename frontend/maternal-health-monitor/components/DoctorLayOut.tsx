@@ -1,7 +1,7 @@
 
 import DoctorSideBar from "./DoctorSideBar";
 
-export default function DoctorLayout({ children }: { children: React.ReactNode }) {
+export default function DoctorLayOut({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen bg-gray-200">
       <DoctorSideBar />
