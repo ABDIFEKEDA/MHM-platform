@@ -1,3 +1,4 @@
+
 import PatientSidebar from "./PatientSidebar";
 
 export default function PatientsLayout({ children }: { children: React.ReactNode }) {
