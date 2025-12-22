@@ -56,6 +56,10 @@ export default function PatientSidebar() {
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Appointments"}
           </Link>
+          <Link href="/dashboard/patients/chat" className={menuItemClass("/dashboard/patients/chat")}>
+            <UsersIcon className="w-6 h-6" />
+            {!collapsed && "assistance Chatboat"}
+          </Link>
           <Link href="/dashboard/patients/Health Records" className={menuItemClass("/dashboard/admin/profile")}>
             <UsersIcon className="w-6 h-6" />
             {!collapsed && "Health Records"}
