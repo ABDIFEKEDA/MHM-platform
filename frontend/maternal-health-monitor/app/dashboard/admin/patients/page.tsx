@@ -18,13 +18,13 @@ import VitalsPatientPopup from "@/components/vitalsPopUp";
 import RegisterPatientPopup from "@/components/PatientRegistrationPopUp";
 import PatientDetailsPopup from "@/components/PatientsDetailPopUp";
 import { Card, CardContent } from "@/components/ui/card";
-import Patient from "../../../type/patients";
+import Patients from "../../../type/patients";
 import EditPatientPopup from "@/components/editPatientsPopUp";
 
 const ITEMS_PER_PAGE = 8;
 
 export default function PatientsPage() {
-  const [patientsData, setPatientsData] = useState<Patient[]>([]);
+  const [patientsData, setPatientsData] = useState<Patients[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState<string | undefined>();
@@ -32,7 +32,7 @@ export default function PatientsPage() {
   const [stats, setStats] = useState({ total: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [isDeleting, setIsDeleting] = useState<number | null>(null);
-  const [editingPatient, setEditingPatient] = useState<Patient | null>(null);
+  const [editingPatient, setEditingPatient] = useState<Patients | null>(null);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -48,7 +48,7 @@ export default function PatientsPage() {
             `Failed to fetch patients: ${res.status} ${res.statusText}`
           );
         }
-        const data: Patient[] = await res.json();
+        const data: Patients[] = await res.json();
         setPatientsData(data);
       } catch (err) {
         console.error("Error fetching patients:", err);
@@ -99,7 +99,7 @@ export default function PatientsPage() {
 
   const totalPages = Math.ceil(filteredPatients.length / ITEMS_PER_PAGE);
 
-  const handleEdit = (patient: Patient) => {
+  const handleEdit = (patient: Patients) => {
     setEditingPatient(patient);
   };
 
@@ -140,7 +140,7 @@ export default function PatientsPage() {
     }
   };
 
-  const handlePatientUpdate = (updatedPatient: Patient) => {
+  const handlePatientUpdate = (updatedPatient: Patients) => {
     setPatientsData((prev) =>
       prev.map((patient) =>
         patient.id === updatedPatient.id ? updatedPatient : patient
