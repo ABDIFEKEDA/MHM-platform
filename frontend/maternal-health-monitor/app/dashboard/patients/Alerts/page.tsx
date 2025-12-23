@@ -43,7 +43,6 @@ const Page = () => {
   return (
     <PatientsLayout>
       <div className="space-y-8">
-        {/* Header */}
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-[#253D90]">
             Alerts & Patient Monitoring
@@ -51,14 +50,12 @@ const Page = () => {
           <VitalsPatientPopup />
         </div>
 
-        {/* Filters */}
         <Card className="shadow-sm">
           <CardContent className="p-6">
             <RecentActivityFilters />
           </CardContent>
         </Card>
 
-        {/* Alerts */}
         <Card className="col-span-1 md:col-span-2">
           <CardHeader>
             <CardTitle className="text-xl font-semibold text-[#253D90]">
@@ -82,13 +79,18 @@ const Page = () => {
             ))}
           </CardContent>
           <CardFooter className="flex justify-center gap-2 pt-4">
-            <Button variant="ghost" size="sm">1</Button>
-            <Button variant="ghost" size="sm">2</Button>
-            <Button variant="ghost" size="sm">Next</Button>
+            <Button variant="ghost" size="sm">
+              1
+            </Button>
+            <Button variant="ghost" size="sm">
+              2
+            </Button>
+            <Button variant="ghost" size="sm">
+              Next
+            </Button>
           </CardFooter>
         </Card>
 
-        {/* Quick Actions */}
         <div className="grid grid-cols-4 md:grid-cols-4 gap-4 pt-12">
           {actions.map((action, index) => (
             <Card key={index} className="shadow-sm hover:shadow-md transition">
