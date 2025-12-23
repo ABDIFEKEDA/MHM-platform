@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import  PatientsLayout from "@/components/PatientsLayout";
+import  PatientsLayout from "@/components/patientsLayout";
 import {
   Send,
   Search,

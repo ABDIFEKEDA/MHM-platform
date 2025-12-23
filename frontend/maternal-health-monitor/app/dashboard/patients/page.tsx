@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import React from "react";
-import PatientsLayout from "@/components/PatientsLayout";
+import PatientsLayout from "@/components/patientsLayout";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, Mail } from "lucide-react";
 import { CardContent, CardHeader } from "@/components/ui/card";

@@ -1,5 +1,5 @@
 "use client";
-import PatientsLayout from "@/components/PatientsLayout";
+import PatientsLayout from "@/components/patientsLayout";
 
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";

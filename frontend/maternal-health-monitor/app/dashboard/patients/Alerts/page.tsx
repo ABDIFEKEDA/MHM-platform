@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import PatientsLayout from "@/components/PatientsLayout";
+import PatientsLayout from "@/components/patientsLayout";
 import VitalsPatientPopup from "@/components/vitalsPopUp";
 import RecentActivityFilters from "@/components/fiter";
 import ViewDetailPopUp from "@/components/ViewDetailPopUp";

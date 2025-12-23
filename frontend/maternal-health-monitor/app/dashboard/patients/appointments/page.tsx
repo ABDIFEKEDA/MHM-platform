@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PatientsLayout from "@/components/PatientsLayout";
+import PatientsLayout from "@/components/patientsLayout";
 import AppointmentPopup from "@/components/AppointmentPopUp";
 import { Badge } from "@/components/ui/badge";
 import {
