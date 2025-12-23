@@ -1,10 +1,8 @@
 import React from 'react'
 import AdminLayout from '@/components/adminLayout'
 
-const page = () => {
+export default function SettingDashboard() {
   return (
     <AdminLayout>page</AdminLayout>
   )
 }
-
-export default page
